@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserEditForm
 from django.contrib.auth import login, authenticate
 
 
@@ -48,6 +48,29 @@ def login_request(request):
 
         form = AuthenticationForm()
         return render(request, 'login_request.html', {'form':form})
-
+ 
+    
+def profile_edit(request):
+    
+    usuario = request.user
+    
+    
+    if request.method == 'POST':
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            informacion = form.cleaned_data
+            
+            # Datos a modificar:
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.save()
+            
+            return render(request, 'profle_edit.html')
+        
+    else:
+        form = UserEditForm(initial={'email':usuario.email})
+        
+    return render(request, 'profile_edit.html', {'form': form, 'usuario':usuario, 'email':usuario.email})
 
 
