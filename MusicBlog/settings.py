@@ -127,10 +127,35 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ( os.path.join(BASE_DIR,'static'),)
 
 #para poder ver las imagenes con url
-MEDIA_ROOT= os.path.join (BASE_DIR,'media')
+MEDIA_ROOT= os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Default',
+        'height': 500,
+        'toolbar_Default': [
+            ['Bold', 'Italic', 'Underline', 'Image', 'Blockquote', 'Link']
+        ]
+    },
+    'image': {
+        'toolbar': 'Image',
+        'height': 300,
+        'toolbar_Image': [
+            ['Image']
+        ]
+    },
+    'description': {
+        'toolbar': 'Description',
+        'height': 200,
+        'toolbar_Description': [
+            ['Bold', 'Italic', 'Underline']
+        ]
+    }
+    
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -89,7 +89,8 @@
                     <h2 class="header__nav-heading h6">Site Navigation</h2>
 
                     <ul class="header__nav">
-                        <li class="current"><a href="{% url 'home' %}" title="">Home</a></li>
+                        <li class=><a href="{% url 'home' %}" title="">Inicio</a></li>
+                        <li class=><a href="{% url 'view_posts' %}" title="">Ver Posteos</a></li>
                         <li class="has-children">
                             <a href="#0" title="">Categories</a>
                             <ul class="sub-menu">
@@ -115,6 +116,7 @@
                         <li><a href="contact.html" title="">Contact</a></li>
                         {% if user.is_authenticated %}
                             <li><a href="{% url 'logout' %}" title="">Logout</a></li>
+                            <li><a href="{% url 'profile' %}" title="">{{ user.get_username }}</a></li>
                         {% else %}
                             <li><a href="{% url 'login' %}" title="">Login</a></li>
                             <li><a href="{% url 'register' %}" title="">Register</a></li>
@@ -217,7 +219,7 @@
                 <div class="col-full">
                     <div class="s-footer__copyright">
                         <span>© Copyright Philosophy 2018</span> 
-                        <span>Site Template by <a href="https://colorlib.com/">Colorlib</a> Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a> Modified by Tomas Capdevila</span>
+                        <span>Site Template by <a href="https://colorlib.com/">Colorlib</a> Downloaded from <a href="https://themeslab.org/" target="_blank">Themeslab</a> Modified by Tomas Capdevila December 2022</span>
                     </div>
 
                     <div class="go-top">

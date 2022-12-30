@@ -30,10 +30,13 @@ urlpatterns = [
     path('login/',login_request, name='login'),
     path('logout/', LogoutView.as_view() , name='logout'),
     path('register/', register, name='register'),
+    path('profile/', profile, name='profile'),
     path('profile_edit/', profile_edit, name='profile_edit'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('mostrar_post/', mostrar_post, name = 'mostrar_post'),
-    path('mostrar_post2/', mostrar_post2, name = 'mostrar_post2'),
+    path('posts/', view_posts, name='view_posts'),
+    #path('mostrar_post/', mostrar_post, name = 'mostrar_post'),
+    #path('mostrar_post2/', mostrar_post2, name = 'mostrar_post2'),
+    path('post/<idPost>', view_single_post, name='view_single_post'),
 ]
 
 if settings.DEBUG:
