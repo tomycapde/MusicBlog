@@ -38,7 +38,7 @@ urlpatterns = [
     path('post/<idPost>', view_single_post, name='view_single_post'),
     path('messages/', all_messages, name='messages'),
     path('new_message/', new_message, name='new_message'),
-    path('chat/,<id>', chat, name='chat'),
+    path('chat/<id>', chat, name='chat'),
 ]
 
 if settings.DEBUG:
