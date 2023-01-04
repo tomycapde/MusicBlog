@@ -118,7 +118,7 @@
                         <li><a href="contact.html" title="">Contact</a></li>
                         -->
                         {% if user.is_authenticated %}
-                            <li class=><a href="{% url 'messages' %}"title="">Mensajes</a></li>
+                            <li class=><a href="{% url 'all_messages' %}"title="">Mensajes</a></li>
                             <li><a href="{% url 'logout' %}" title="">Logout</a></li>
                             <li><a href="{% url 'profile' %}" title="">{{ user.get_username }}</a></li>
                         {% else %}

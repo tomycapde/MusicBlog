@@ -16,8 +16,7 @@ def all_messages(request):
         #'mensajes':mensajes
     }
     
-    return render(request, 'prueba_bandeja.html', context)
-
+    return render(request, 'messages/prueba_bandeja.html', context)
 
 
 def new_message(request):
@@ -51,15 +50,12 @@ def new_message(request):
                 
                 error_message = f"El usuario {receiver} no existe"
                 form = Message_Form()
-                return render(request, 'prueba_mensaje.html',{'form':form, 'error_message':error_message})
+                return render(request, 'messages/prueba_mensaje.html',{'form':form, 'error_message':error_message})
         else:
             form = Message_Form()    
     else:
         form = Message_Form()
-    return render(request, 'prueba_mensaje.html',{'form':form})
-
-
-
+    return render(request, 'messages/prueba_mensaje.html',{'form':form})
 
 
 
@@ -70,4 +66,4 @@ def chat(request, id):
     message.seen = True
     message.save()
 
-    return render(request, 'prueba_chat.html', {'message':message})
+    return render(request, 'messages/prueba_chat.html', {'message':message})

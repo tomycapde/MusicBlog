@@ -14,7 +14,7 @@
 
     {% for mensaje in for_me %}
     <p>
-        <a href="/chat/{{ mensaje.id }}">{{ mensaje }} | {{ mensaje.is_seen }}</a>
+        <a href="/messages/chat/{{ mensaje.id }}">{{ mensaje }} | {{ mensaje.is_seen }}</a>
     </p>
     {% endfor %}
 
@@ -23,7 +23,7 @@
     
     {% for mensaje in from_me %}
     <p>
-        <a href="/chat/{{ mensaje.id }}">{{ mensaje }} | {{ mensaje.is_seen }}</a>
+        <a href="/messages/chat/{{ mensaje.id }}">{{ mensaje }} | {{ mensaje.is_seen }}</a>
     </p>
     {% endfor %}
 

@@ -27,7 +27,7 @@ def view_single_post(request,idPost):
     print(avatar)
     print('---------------')
     
-    return render(request, 'standar_post.html', context)
+    return render(request, 'posts/standar_post.html', context)
     
     
 def view_posts(request):
@@ -39,4 +39,4 @@ def view_posts(request):
     'posts':posts
     }
     
-    return render(request, 'all_posts.html', context)
+    return render(request, 'posts/all_posts.html', context)

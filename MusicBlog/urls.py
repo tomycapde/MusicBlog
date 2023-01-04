@@ -17,28 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+
 from .views import home
 
-from Users.views import *
-from Posts.views import *
-from Messages.views import *
 
-from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home, name='home'),
-    path('login/',login_request, name='login'),
-    path('logout/', LogoutView.as_view() , name='logout'),
-    path('register/', register, name='register'),
-    path('profile/', profile, name='profile'),
-    path('profile_edit/', profile_edit, name='profile_edit'),
+    path('account/', include('Users.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('posts/', view_posts, name='view_posts'),
-    path('post/<idPost>', view_single_post, name='view_single_post'),
-    path('messages/', all_messages, name='messages'),
-    path('new_message/', new_message, name='new_message'),
-    path('chat/<id>', chat, name='chat'),
+    path('blog/', include('Posts.urls')),
+    path('messages/', include('Messages.urls')),
 ]
 
 if settings.DEBUG:
