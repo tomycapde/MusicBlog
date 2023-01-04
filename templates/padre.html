@@ -91,6 +91,8 @@
                     <ul class="header__nav">
                         <li class=><a href="{% url 'home' %}" title="">Inicio</a></li>
                         <li class=><a href="{% url 'view_posts' %}" title="">Ver Posteos</a></li>
+                        <li class=><a href="" title="">Acerca de</a></li>
+                        <!--
                         <li class="has-children">
                             <a href="#0" title="">Categories</a>
                             <ul class="sub-menu">
@@ -114,7 +116,9 @@
                         <li><a href="style-guide.html" title="">Styles</a></li>
                         <li><a href="about.html" title="">About</a></li>
                         <li><a href="contact.html" title="">Contact</a></li>
+                        -->
                         {% if user.is_authenticated %}
+                            <li class=><a href="{% url 'messages' %}"title="">Mensajes</a></li>
                             <li><a href="{% url 'logout' %}" title="">Logout</a></li>
                             <li><a href="{% url 'profile' %}" title="">{{ user.get_username }}</a></li>
                         {% else %}

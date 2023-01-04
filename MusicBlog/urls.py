@@ -21,6 +21,7 @@ from .views import home
 
 from Users.views import *
 from Posts.views import *
+from Messages.views import *
 
 from django.contrib.auth.views import LogoutView
 
@@ -34,9 +35,10 @@ urlpatterns = [
     path('profile_edit/', profile_edit, name='profile_edit'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('posts/', view_posts, name='view_posts'),
-    #path('mostrar_post/', mostrar_post, name = 'mostrar_post'),
-    #path('mostrar_post2/', mostrar_post2, name = 'mostrar_post2'),
     path('post/<idPost>', view_single_post, name='view_single_post'),
+    path('messages/', all_messages, name='messages'),
+    path('new_message/', new_message, name='new_message'),
+    path('chat/,<id>', chat, name='chat'),
 ]
 
 if settings.DEBUG:

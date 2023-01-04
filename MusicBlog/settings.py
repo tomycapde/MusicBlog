@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Posts',
     'ckeditor',
     'ckeditor_uploader',
+    'Messages',
 ]
 
 MIDDLEWARE = [
