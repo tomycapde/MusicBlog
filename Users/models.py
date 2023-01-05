@@ -1,13 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
-class Avatar(models.Model):
-    # user vinculate
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # folder in media
-    image = models.ImageField(upload_to='avatars', blank=True)
+# Model Profile contains all data for users   
+class Profile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
+    avatar = models.ImageField(upload_to='avatars', blank=True)
+    website = models.URLField(max_length=200, null=True, blank=True)
+    
     
     def __str__(self):
-        return f"{self.user} - {self.image}"
+        return str(self.user)
     
+    def get_avatar(self):
+        return self.avatar

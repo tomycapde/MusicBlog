@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm, UserEditForm
 from django.contrib.auth import login, authenticate
-from .models import Avatar
+#from .models import Avatar
 
 
 def register(request):
@@ -77,11 +77,13 @@ def profile_edit(request):
 
 def profile(request):
     usuario = request.user
-    avatar =  Avatar.objects.filter(user=usuario.id)
+
     context = {
         'username': usuario.username,
         'email': usuario.email,
-        'avatar': avatar[0].image.url,
+        'avatar': usuario.profile.avatar,
+        'bio': usuario.profile.bio,
+        'website': usuario.profile.website,
     }
     
     return render(request, 'users/profile.html', context)

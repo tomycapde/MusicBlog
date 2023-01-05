@@ -10,7 +10,8 @@ class Post(models.Model):
     body = RichTextUploadingField(null = True, config_name='default')
     author = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     date = models.DateTimeField(auto_now_add=True)
-    images = RichTextUploadingField(null = True, config_name='image')
+    #images = RichTextUploadingField(null = True, config_name='image')
+    image = models.ImageField(upload_to="uploads/", null=True)
     category = models.CharField(max_length=50, null=True)
     
     def __str__(self):

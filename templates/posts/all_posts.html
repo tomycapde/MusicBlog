@@ -56,9 +56,8 @@
                 <article class="masonry__brick entry format-standard" data-aos="fade-up">
                         
                     <div class="entry__thumb">
-                        <a class="entry__thumb-link">
-                            <img srcset="{{ post.images }}" alt="">
-                            <p>{{ post.images }}</p>
+                        <a class="entry__thumb-link" href="/blog/post/{{ post.id }}">
+                            <img srcset="/media/{{ post.image }}" alt="">
                         </a>
                     </div>
     
@@ -73,7 +72,7 @@
                         </div>
                         <div class="entry__excerpt">
                             <p>
-                                {{ post.description }}
+                                {{ post.description | safe }}
                             </p>
                         </div>
                         <div class="entry__meta">

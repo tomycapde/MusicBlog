@@ -6,14 +6,12 @@ from django.contrib.auth.models import User
 # Create your views here.
 def all_messages(request):
     
-    #mensajes = Message.objects.filter(receiver=request.user)
     for_me = Message.objects.filter(receiver=request.user)
     from_me = Message.objects.filter(sender=request.user)
     
     context = {
         'for_me': for_me,
         'from_me':from_me,
-        #'mensajes':mensajes
     }
     
     return render(request, 'messages/prueba_bandeja.html', context)
@@ -34,7 +32,6 @@ def new_message(request):
                 message = Message.objects.create()
                 message.sender = str(request.user)
                 message.receiver = form.cleaned_data['receiver']
-                #message.content = form.cleaned_data['content']
                 message.content = str(form.cleaned_data['content'])
                 message.seen = False 
 
