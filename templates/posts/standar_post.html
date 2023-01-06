@@ -74,6 +74,12 @@
                 <p>
                     {{ body | safe}}
                 </p>
+
+                {% if user == author %}
+                <p>
+                    <a href="/blog/edit_post/{{ id }}">Editar post</a>
+                </p>
+                {% endif %}
                 <!--
                 <h2>Large Heading</h2>
 
