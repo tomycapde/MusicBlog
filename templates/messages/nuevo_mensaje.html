@@ -1,0 +1,106 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Login</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href='{% static "css/base.css" %}'>
+    <link rel="stylesheet" href='{% static "css/vendor.css" %}'>
+    <link rel="stylesheet" href='{% static "css/main.css" %}'>
+
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/pace.min.js' %}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+
+<body id="top">
+
+    <!-- pageheader
+    ================================================== -->
+    <!-- end s-pageheader -->
+
+    {% block padre %}
+
+
+    <!-- s-content
+    ================================================== -->
+    
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+            <div class="s-content__header col-full">
+                <h1 class="s-content__header-title">
+                    Nuevo Mensaje:
+                </h1>
+                <p>
+                    {{ error_message }}
+                    <form action="{% url 'new_message' %}" method="POST">
+                        {% csrf_token %}
+                        <div align='center'>
+                        {{ form.as_p }}
+                        </div>
+                        <input type="submit" value="Enviar">
+                    </form>
+                </p>   
+            </div> <!-- end s-content__header -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+    
+{% endblock %}
+
+    <!-- s-footer
+    ================================================== -->
+    <!-- end s-footer -->
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'https://maps.googleapis.com/maps/api/js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

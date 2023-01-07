@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Message
-from .forms import Message_Form
+from .forms import Message_Form, Respond_Form
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -14,7 +14,7 @@ def all_messages(request):
         'from_me':from_me,
     }
     
-    return render(request, 'messages/prueba_bandeja.html', context)
+    return render(request, 'messages/bandeja.html', context)
 
 
 def new_message(request):
@@ -32,6 +32,7 @@ def new_message(request):
                 message = Message.objects.create()
                 message.sender = str(request.user)
                 message.receiver = form.cleaned_data['receiver']
+                message.subject = form.cleaned_data['subject']
                 message.content = str(form.cleaned_data['content'])
                 message.seen = False 
 
@@ -39,7 +40,7 @@ def new_message(request):
 
                 print('EXISTE')
                 
-                return redirect('home')
+                return redirect('all_messages')
                     
             except User.DoesNotExist:
                 
@@ -47,20 +48,66 @@ def new_message(request):
                 
                 error_message = f"El usuario {receiver} no existe"
                 form = Message_Form()
-                return render(request, 'messages/prueba_mensaje.html',{'form':form, 'error_message':error_message})
+            
+                return render(request, 'messages/nuevo_mensaje.html',{'form':form, 'error_message':error_message})
         else:
             form = Message_Form()    
     else:
         form = Message_Form()
-    return render(request, 'messages/prueba_mensaje.html',{'form':form})
-
+    
+    return render(request, 'messages/nuevo_mensaje.html',{'form':form})
 
 
 def chat(request, id):
-    
     message = Message.objects.get(id=id)
 
     message.seen = True
     message.save()
 
-    return render(request, 'messages/prueba_chat.html', {'message':message})
+
+    return render(request, 'messages/chat.html', {'message': message}) 
+
+
+    
+def respond_message(request, receiver, subject):
+    if request.method == 'POST':
+        
+        form = Respond_Form(request.POST)
+        
+        if form.is_valid():
+            
+            receiver = form.cleaned_data['receiver']
+            
+            try:
+                user = User.objects.get(username=receiver)
+                
+                message = Message.objects.create()
+                message.sender = str(request.user)
+                message.receiver = receiver
+                message.subject = subject
+                message.content = str(form.cleaned_data['content'])
+                message.seen = False 
+
+                message.save()
+
+                print('EXISTE')
+                
+                return redirect('all_messages')
+                    
+            except User.DoesNotExist:
+                
+                print('NO EXISTE')
+                
+                error_message = f"El usuario {receiver} no existe"
+                form = Respond_Form()
+                return render(request, 'messages/responder_mensaje.html',{'form':form, 'error_message':error_message, 'receiver':receiver, 'subject': subject})
+        else:
+            form = Respond_Form()    
+    else:
+        form = Respond_Form()
+    return render(request, 'messages/responder_mensaje.html',{'form':form, 'receiver':receiver, 'subject': subject})
+
+
+
+
+
