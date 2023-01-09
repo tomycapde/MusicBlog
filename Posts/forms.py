@@ -1,11 +1,16 @@
 from django import forms
-from ckeditor_uploader.fields import RichTextUploadingField
-from ckeditor.fields import RichTextField
+from .models import Post
 
-class PostForm(forms.Form):
-    title = forms.CharField(max_length=150)
-    description = RichTextField(config_name='description')
-    body = RichTextField(config_name='default')
-    #image = forms.ImageField(upload_to="uploads/")
-    category = forms.CharField(max_length=50)
-    
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','description','body','image','category']
+        labels = {
+            'title': 'Titulo',
+            'description': 'Descripcion',
+            'body': 'Cuerpo',
+            'image': 'Imagen',
+            'category': 'Categoria'
+        }
+
+

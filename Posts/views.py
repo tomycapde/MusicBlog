@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
 
@@ -41,23 +41,26 @@ def view_posts(request):
     
     return render(request, 'posts/all_posts.html', context)
 
-'''
+
 def edit_post(request, idPost):
     
-    post = Post.objects.get(id=idPost)
+    post = Post.objects.get(id=idPost)   
+    form = PostForm(instance=post)
     
-    form = PostForm()
-    
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            
+            return redirect(f'/blog/post/{idPost}')
     
     context = {
         'form':form,
     }
     
     return render(request, 'posts/edit_post.html', context)
-    
-    '''
-    
-def edit_post(CreateView):
-    model = Post
-    template_name = 'post/edit_post.html'
-    fields = '__all__'
+
+  
+def create_post(request):
+    form = PostForm()
+    return render(request, 'posts/create_post.html',{'form':form})

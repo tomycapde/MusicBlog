@@ -52,49 +52,21 @@
         <div class="row">
 
             <div class="s-content__header col-full">
-                <h2>
-                    {{ mensaje2 }}
-                </h2>
                 <h1 class="s-content__header-title">
                     Editar post
                 </h1>
-                <h2>
-                    <p>
-                        <form method='POST'>
+                <p>
+                    <form action="" method='POST'>
                         {% csrf_token %}
-                        {{ form.media }}
-                        {{ form.as_p}}
-                        </form>
-
-                    </p>
-                    <p>
-
-                        
-
-                    </p>
-                    
-                </h2>
-            </div> <!-- end s-content__header -->
-
-
-
-
-
-            <div class="col-full s-content__main">
-<!--
-                <form name="cForm" id="cForm" method="POST" action="{% url 'profile_edit' %}" align='center'>
-                    {% csrf_token %}
                         <div align='center'>
-                        {{form.as_p}}
+                            {{ form.media }}
+                            {{ form.as_p }}
                         </div>
-                    <input type='submit' value='Enviar datos'>
-                </form> 
-                -->
-                
-                <!-- end form -->
-
-            </div> <!-- end s-content__main -->
-
+                        <input type="submit" value="Finalizar">
+                    
+                    </form>
+                </p>
+            </div> <!-- end s-content__header -->
         </div> <!-- end row -->
 
     </section> <!-- s-content -->
