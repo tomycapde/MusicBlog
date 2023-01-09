@@ -62,5 +62,12 @@ def edit_post(request, idPost):
 
   
 def create_post(request):
-    form = PostForm()
+    
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('view_posts')
+    else:
+        form = PostForm()
     return render(request, 'posts/create_post.html',{'form':form})
