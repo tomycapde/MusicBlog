@@ -59,14 +59,13 @@
                     Editar Perfil
                 </h1>
                 <h2>
-                    <p>Usuario acutal: {{ usuario }}</p>
-                    <p>Email actual: {{ email }}</p>
+                    <p>Usuario: {{ user.username }}</p>
                 </h2>
             </div> <!-- end s-content__header -->
 
             <div class="col-full s-content__main">
 
-                <form name="cForm" id="cForm" method="POST" action="{% url 'profile_edit' %}" align='center'>
+                <form name="cForm" id="cForm" method="POST" action="{% url 'profile_edit' %}" align='center' enctype='multipart/form-data'>
                     {% csrf_token %}
                         <div align='center'>
                         {{form.as_p}}

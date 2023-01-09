@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Message
-from .forms import Message_Form, Respond_Form
+from .forms import Message_Form, Respond_Form, RespondForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -69,9 +69,9 @@ def chat(request, id):
 
     return render(request, 'messages/chat.html', {'message': message}) 
 
-
+'''
 @login_required
-def respond_message(request, receiver, subject):
+def respond_message(request, receiver):
     if request.method == 'POST':
         
         form = Respond_Form(request.POST)
@@ -86,7 +86,6 @@ def respond_message(request, receiver, subject):
                 message = Message.objects.create()
                 message.sender = str(request.user)
                 message.receiver = receiver
-                message.subject = subject
                 message.content = str(form.cleaned_data['content'])
                 message.seen = False 
 
@@ -108,7 +107,21 @@ def respond_message(request, receiver, subject):
     else:
         form = Respond_Form()
     return render(request, 'messages/responder_mensaje.html',{'form':form, 'receiver':receiver, 'subject': subject})
+'''
 
+
+def respond_message(request, receiver):
+    #sender = request.user.username
+    mensaje = Message.objects.create(sender = request.user.username, receiver = receiver)
+    
+    if request.method == 'POST':
+        form = RespondForm(request.POST, instance=mensaje)
+        if form.is_valid():
+            form.save()
+            return redirect('all_messages')
+    else:
+        form = RespondForm(instance=mensaje)
+        return render(request, 'messages/responder_mensaje.html', {'form': form, 'receiver': receiver})
 
 
 

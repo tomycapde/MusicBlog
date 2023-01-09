@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserRegisterForm, UserEditForm
+from .forms import UserRegisterForm, UserEditForm, ProfileEditForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from .models import Profile
+from django.contrib.auth.models import User
 #from .models import Avatar
 
 
@@ -10,7 +12,11 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
+            name = form.cleaned_data['username']
             form.save()
+            usuario = User.objects.get(username=name)
+            profile = Profile.objects.create(user = usuario)
+            profile.save()
 
             form2 = AuthenticationForm()
             return render(request,"users/login_request.html", {'mensaje2': "Usuario creado correctamente", 'form': form2 })
@@ -50,12 +56,12 @@ def login_request(request):
 
         form = AuthenticationForm()
         return render(request, 'users/login_request.html', {'form':form})
- 
+
+
 @login_required
-def profile_edit(request):
+def user_edit(request):
     
     usuario = request.user
-    
     
     if request.method == 'POST':
         form = UserEditForm(request.POST)
@@ -71,9 +77,27 @@ def profile_edit(request):
             return render(request, 'users/profle_edit.html')
         
     else:
-        form = UserEditForm(initial={'email':usuario.email})
-        
+        form = UserEditForm(instance=usuario)
+    
     return render(request, 'users/profile_edit.html', {'form': form, 'usuario':usuario, 'email':usuario.email})
+
+@login_required
+def profile_edit(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileEditForm(instance=profile)
+        return render(request, 'users/profile_edit.html', {'form': form})
+
+
+
+
+
+
 
 @login_required
 def profile(request):
@@ -87,7 +111,7 @@ def profile(request):
     context = {
         'username': usuario.username,
         'email': usuario.email,
-        'avatar': usuario.profile.avatar,
+        'avatar': avatar,
         'bio': usuario.profile.bio,
         'website': usuario.profile.website,
     }

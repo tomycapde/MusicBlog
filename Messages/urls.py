@@ -5,5 +5,5 @@ urlpatterns = [
     path('all_messages/', all_messages, name='all_messages'),
     path('new_message/', new_message, name='new_message'),
     path('chat/<id>', chat, name='chat'),
-    path('respond/<receiver><subject>', respond_message, name='respond_message')
+    path('respond/<receiver>', respond_message, name='respond_message')
 ]

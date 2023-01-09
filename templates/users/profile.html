@@ -65,23 +65,11 @@
                     <p>Bio: {{ bio }}</p>
                     <p>Website: <a href="{{website}}">{{ website }}</a></p>
                 </h2>
+
+                <a class="btn btn--stroke" href="{% url 'profile_edit' %}">Editar perfil</a>
+                <a class="btn btn--stroke" href="{% url 'user_edit' %}">Editar usuario</a>
             </div> <!-- end s-content__header -->
 
-
-
-
-
-            <div class="col-full s-content__main">
-
-                <form name="cForm" id="cForm" method="POST" action="{% url 'profile_edit' %}" align='center'>
-                    {% csrf_token %}
-                        <div align='center'>
-                        {{form.as_p}}
-                        </div>
-                    <input type='submit' value='Enviar datos'>
-                </form> <!-- end form -->
-
-            </div> <!-- end s-content__main -->
 
         </div> <!-- end row -->
 

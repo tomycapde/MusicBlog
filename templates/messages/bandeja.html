@@ -59,7 +59,7 @@
                     <p>Bandeja de entrada:</p>
                 </h2>
                 <p>
-                    {% for mensaje in for_me %}
+                    {% for mensaje in for_me reversed %}
                     <p>
                         <a href="/messages/chat/{{ mensaje.id }}">{{ mensaje.view }} | {{ mensaje.date }} | {{ mensaje.is_seen }}</a>
                     </p>
@@ -70,7 +70,7 @@
                     <p>Enviados:</p>
                 </h2>
                 <p>
-                    {% for mensaje in from_me %}
+                    {% for mensaje in from_me reversed %}
                     <p>
                         <a href="/messages/chat/{{ mensaje.id }}">{{ mensaje.view }} | {{ mensaje.date }} | {{ mensaje.is_seen }}</a>
                     </p>
