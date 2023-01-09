@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm, UserEditForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 #from .models import Avatar
 
 
@@ -50,7 +51,7 @@ def login_request(request):
         form = AuthenticationForm()
         return render(request, 'users/login_request.html', {'form':form})
  
-    
+@login_required
 def profile_edit(request):
     
     usuario = request.user
@@ -74,9 +75,14 @@ def profile_edit(request):
         
     return render(request, 'users/profile_edit.html', {'form': form, 'usuario':usuario, 'email':usuario.email})
 
-
+@login_required
 def profile(request):
     usuario = request.user
+    
+    if usuario.profile.avatar:
+        avatar = usuario.profile.avatar
+    else:
+        avatar = "avatars/user-logo.png"
 
     context = {
         'username': usuario.username,

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth.decorators import login_required
 
-from django.views.generic import CreateView
 # Create your views here.
 
 
@@ -41,7 +41,7 @@ def view_posts(request):
     
     return render(request, 'posts/all_posts.html', context)
 
-
+@login_required
 def edit_post(request, idPost):
     
     post = Post.objects.get(id=idPost)   
@@ -60,7 +60,7 @@ def edit_post(request, idPost):
     
     return render(request, 'posts/edit_post.html', context)
 
-  
+@login_required
 def create_post(request):
     
     if request.method == 'POST':

@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Message
 from .forms import Message_Form, Respond_Form
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def all_messages(request):
     
     for_me = Message.objects.filter(receiver=request.user)
@@ -16,7 +18,7 @@ def all_messages(request):
     
     return render(request, 'messages/bandeja.html', context)
 
-
+@login_required
 def new_message(request):
     if request.method == 'POST':
         
@@ -57,7 +59,7 @@ def new_message(request):
     
     return render(request, 'messages/nuevo_mensaje.html',{'form':form})
 
-
+@login_required
 def chat(request, id):
     message = Message.objects.get(id=id)
 
@@ -68,7 +70,7 @@ def chat(request, id):
     return render(request, 'messages/chat.html', {'message': message}) 
 
 
-    
+@login_required
 def respond_message(request, receiver, subject):
     if request.method == 'POST':
         

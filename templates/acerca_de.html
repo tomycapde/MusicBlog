@@ -1,0 +1,113 @@
+{% extends 'padre.html' %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Login</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href='{% static "css/base.css" %}'>
+    <link rel="stylesheet" href='{% static "css/vendor.css" %}'>
+    <link rel="stylesheet" href='{% static "css/main.css" %}'>
+
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/pace.min.js' %}"></script>
+
+    <!-- favicons
+    ================================================== -->
+
+</head>
+
+<body id="top">
+
+    <!-- pageheader
+    ================================================== -->
+    <!-- end s-pageheader -->
+
+    {% block padre %}
+
+
+    <!-- s-content
+    ================================================== -->
+    
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+            <div class="s-content__header col-full">
+                <h1 class="s-content__header-title">
+                    Sobre Music Blog
+                </h1>
+            </div> <!-- end s-content__header -->
+
+            <div class="col-full s-content__main">
+
+                <p>
+                    Music Blog es un sitio web tipo blog en donde se pueden leer noticias sobre la industria de la musica. Esta pagina fue creada por Tomas Capdevila en diciembre de 2022 como proyecto final para el curso de programacion de python de Coderhouse.
+                </p>
+                <p>
+                    La idea surgio porque el creador del sitio es un aficionado de la musica y le parecio un buen punto de partida hacer un proyecto relacionado con este tema. El trabajo se realizo completamente por Tomas Capdevila basado en los conocimientos adquiridos en las clases de Coderhouse y otros adquiridos leyendo la documentacion oficial de Django apoyandose con videos de youtube y distintos foros de programacion como "Stackoverflow".
+                </p>
+                <p>
+                    Los posteos en el blog fueron generados utilizando la inteligencia artificial "ChatGPT" con la cual se redactaron el cuerpo y la descripcion de cada uno de los posteos presentes a modo de ejemplo. Las imagenes que acompañan a cada post fueron descargadas de internet utilizando google como motor de busqueda. 
+                </p>
+                <p>
+                    En el apartado tecnico, la pagina posee tres "apps". Una de ellas llamada "Posts" es la encargada de gestionar los posteos del blog, tanto como para crear, editar o mostrar cada uno de ellos. Otra llamada "Users", es la encargada de gestionar los usuarios y sus perfiles; mientras que la ultima, llamada "Messages", es la encargada de gestionar el sistema de mensajeria interno del sitio para que los usuarios se puedan comunicar entre si.
+                </p>
+                <p>
+                    Para construir el sitio se utilizo el framework de python "Django" y una plantilla descargada de internet para la parte visual (html, css y js).
+                </p>
+            </div> <!-- end s-content__main -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+    
+{% endblock %}
+
+    <!-- s-footer
+    ================================================== -->
+    <!-- end s-footer -->
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'https://maps.googleapis.com/maps/api/js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
